@@ -39,7 +39,7 @@ function WeatherDisplay() {
             {city && <h1 className="city-name">{city}</h1>}
             <div className="weather-cards-container">
                 {weatherCards.map((dayData, index) => (
-                    <WeatherCard key={index} {...dayData} />
+                    <WeatherCard key={index} {...dayData}  day={index === 0 ? 'Today' : dayData.day} />
                 ))}
             </div>
         </div>
