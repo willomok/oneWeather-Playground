@@ -37,6 +37,6 @@ const WeatherCard = ({
             </div>
         </div>
     );
-}
+};
 
 export default WeatherCard;

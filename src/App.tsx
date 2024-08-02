@@ -1,5 +1,6 @@
 import WeatherDisplay from './components/WeatherDisplay';
 
+
 function App() {
     return (
         <div id='app'>

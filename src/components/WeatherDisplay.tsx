@@ -1,10 +1,12 @@
+
 import { useEffect, useState } from 'react';
 import WeatherCard from './WeatherCard';
-import { fetchWeatherData } from '../services/weatherService';
 import SearchBar from './SearchBar';
+import { fetchWeatherData } from '../services/weatherService';
+
 function WeatherDisplay() {
     const [weatherCards, setWeatherCards] = useState<any[]>([]);
-    const [city, setCity] = useState('London'); // Default city
+    const [city, setCity] = useState('Manchester'); // Default city
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -16,7 +18,7 @@ function WeatherDisplay() {
             }
         };
 
-        fetchWeather();
+        fetchWeather().catch(error => console.error(error));
     }, [city]); // Refetch weather data when the city changes
 
     const handleSearch = (searchedCity: string) => {
@@ -38,3 +40,4 @@ function WeatherDisplay() {
 }
 
 export default WeatherDisplay;
+

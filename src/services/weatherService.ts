@@ -34,64 +34,39 @@ interface WeatherApiResponse {
     }[];
 }
 
+const conditionTypeMap: Record<string, string> = {
+    Rain: 'rainy',
+    Clear: 'sunny',
+    Clouds: 'cloudy',
+    Snow: 'snowy',
+    Drizzle: 'drizzly',
+    Thunderstorm: 'stormy',
+    default: 'default',
+};
+
 export const fetchWeatherData = async (city: string): Promise<WeatherData[]> => {
     try {
-        const response = await axios.get<WeatherApiResponse>(BASE_URL, {
-            params: {
-                q: city,
-                appid: API_KEY,
-                units: 'metric',
-            },
+        const { data } = await axios.get<WeatherApiResponse>(BASE_URL, {
+            params: { q: city, appid: API_KEY, units: 'metric' },
         });
 
-        const data = response.data;
-
-        // Group weather data by day
-        const dailyData: Record<string, any[]> = data.list.reduce((acc: Record<string, any[]>, curr) => {
-            const date = curr.dt_txt.split(' ')[0]; // Extract the date part
-            if (!acc[date]) acc[date] = [];
+        // Organize the data by date
+        const dailyData = data.list.reduce((acc, curr) => {
+            const date = curr.dt_txt.split(' ')[0];
+            acc[date] = acc[date] || [];
             acc[date].push(curr);
             return acc;
-        }, {});
+        }, {} as Record<string, typeof data.list>);
 
-        // Process each day's data
-        const weatherCards = Object.keys(dailyData).map((date) => {
-            const dayData = dailyData[date];
-
-            // Calculate average temperature, min, max, and wind speed
-            const avgTemp = dayData.reduce((sum: number, item) => sum + item.main.temp, 0) / dayData.length;
-            const minTemp = Math.min(...dayData.map((item) => item.main.temp_min));
-            const maxTemp = Math.max(...dayData.map((item) => item.main.temp_max));
-            const windSpeed = dayData.reduce((sum: number, item) => sum + item.wind.speed, 0) / dayData.length;
-
-            // Use the first weather entry of the day for the icon and description
+        // Map the organized data to the WeatherData structure
+        return Object.entries(dailyData).map(([date, dayData]) => {
+            const avgTemp = dayData.reduce((sum, { main }) => sum + main.temp, 0) / dayData.length;
+            const minTemp = Math.min(...dayData.map(({ main }) => main.temp_min));
+            const maxTemp = Math.max(...dayData.map(({ main }) => main.temp_max));
+            const windSpeed = dayData.reduce((sum, { wind }) => sum + wind.speed, 0) / dayData.length;
             const { icon, description, main } = dayData[0].weather[0];
             const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
-
-            // Assign a condition type based on the main weather condition
-            let conditionType = '';
-            switch (main) {
-                case 'Rain':
-                    conditionType = 'rainy';
-                    break;
-                case 'Clear':
-                    conditionType = 'sunny';
-                    break;
-                case 'Clouds':
-                    conditionType = 'cloudy';
-                    break;
-                case 'Snow':
-                    conditionType = 'snowy';
-                    break;
-                case 'Drizzle':
-                    conditionType = 'drizzly';
-                    break;
-                case 'Thunderstorm':
-                    conditionType = 'stormy';
-                    break;
-                default:
-                    conditionType = 'default';
-            }
+            const conditionType = conditionTypeMap[main] || conditionTypeMap.default;
 
             return {
                 day: new Date(date).toLocaleDateString('en-GB', { weekday: 'long' }),
@@ -102,13 +77,11 @@ export const fetchWeatherData = async (city: string): Promise<WeatherData[]> => 
                 minTemp: minTemp.toFixed(1),
                 maxTemp: maxTemp.toFixed(1),
                 windSpeed: windSpeed.toFixed(1),
-                conditionType, // Include the condition type
+                conditionType,
             };
         });
 
-        return weatherCards;
-
     } catch (err: any) {
-        throw new Error(err.response.data.message);
+        throw err.response?.data?.message || 'Failed to fetch weather data';
     }
 };
