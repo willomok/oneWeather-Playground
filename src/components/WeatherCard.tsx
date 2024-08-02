@@ -28,11 +28,11 @@ const WeatherCard = ({
                 <p>{date}</p>
             </div>
             <div className="weather-card-body">
-                <h2 className="temperature">{avgTemp.slice(0, -2)}°C</h2>
+                <h2 className="temperature">{avgTemp.slice(0, -2)}°c</h2>
                 <img src={iconUrl} alt={description} className="weather-icon" />
                 <p className="description"><span>{description}</span></p>
-                <p className="temperature-hi-lo">lo   {minTemp}°C</p>
-                <p className="temperaturehi-lo">hi  {maxTemp}°C</p>
+                <p className="temperature-hi-lo">lo   {minTemp}°c</p>
+                <p className="temperaturehi-lo">hi  {maxTemp}°c</p>
                 <p className="wind-speed">wind  {windSpeed} m/s</p>
             </div>
         </div>

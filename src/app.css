@@ -77,6 +77,45 @@ body {
     color: #404040;/* Lighter button color on hover */
 }
 
+.error-message {
+    color: red;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+/* Container for City Name */
+.city-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* This ensures it takes up full height if needed */
+    width: 100%; /* Ensures it takes up full width */
+    text-align: center;
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    font-size: 2em; /* Base font size */
+    color: #FFFFFF; /* White text color */
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .city-name h1 {
+        font-size: 2.5em; /* Larger font size for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .city-name h1 {
+        font-size: 3em; /* Even larger font size for large screens */
+    }
+}
+
+
+
 /* Weather Cards Container */
 .weather-cards-container {
     display: flex;
@@ -103,6 +142,10 @@ body {
     transition: background-color 0.3s ease-in-out;
 }
 
+.weather-card h2 {
+    color: #FFFFFF;
+}
+
 .weather-card-body {
     margin-top: 12px;
 }
@@ -116,6 +159,8 @@ body {
     font-size: 1.1em;
     color: #FFFFFF; /* Consistent white for description */
 }
+
+
 
 /* Temperature Styling - Larger and Responsive */
 .temperature {
@@ -189,40 +234,6 @@ body {
 @media (min-width: 1024px) {
     .temperature {
         font-size: 3em; /* Even larger temperature text on large screens */
-    }
-}
-
-/* Container for City Name */
-.city-name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* This ensures it takes up full height if needed */
-    width: 100%; /* Ensures it takes up full width */
-    text-align: center;
-    margin: 0; /* Remove any default margin */
-    padding: 0; /* Remove any default padding */
-}
-
-/* Styling for the City Name Text */
-.city-name h1 {
-    font-size: 2em; /* Base font size */
-    color: #FFFFFF; /* White text color */
-    margin: 0;
-    padding: 10px; /* Optional: add padding for spacing */
-    text-align: center;
-}
-
-/* Responsive adjustments */
-@media (min-width: 768px) {
-    .city-name h1 {
-        font-size: 2.5em; /* Larger font size for medium screens */
-    }
-}
-
-@media (min-width: 1024px) {
-    .city-name h1 {
-        font-size: 3em; /* Even larger font size for large screens */
     }
 }
 

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import WeatherCard from './WeatherCard';
 import SearchBar from './SearchBar';
@@ -7,6 +6,7 @@ import { fetchWeatherData } from '../services/weatherService';
 function WeatherDisplay() {
     const [weatherCards, setWeatherCards] = useState<any[]>([]);
     const [city, setCity] = useState('Manchester'); // Default city
+    const [error, setError] = useState<string | null>(null); // State to store error message
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -21,23 +21,29 @@ function WeatherDisplay() {
         fetchWeather().catch(error => console.error(error));
     }, [city]); // Refetch weather data when the city changes
 
-    const handleSearch = (searchedCity: string) => {
-        setCity(searchedCity); // Update the city to the searched value
+    const handleSearch = async (searchedCity: string) => {
+        try {
+            const data = await fetchWeatherData(searchedCity); // Attempt to fetch weather data for the new city
+            setWeatherCards(data); // If successful, update the weather data
+            setCity(searchedCity); // Only update the city if the fetch was successful
+        } catch (error) {
+            console.error('Failed to fetch weather data for searched city:', error);
+            setError('Please enter a correct city name');
+        }
     };
 
     return (
         <div className="weather-display">
-        <SearchBar onSearch={handleSearch} />
-        {city && <h1 className="city-name">{city}</h1>}
-        <div className="weather-cards-container">
-          {weatherCards.map((dayData, index) => (
-            <WeatherCard key={index} {...dayData} />
-          ))}
+            <SearchBar onSearch={handleSearch} />
+            {error && <p className="error-message">{error}</p>}
+            {city && <h1 className="city-name">{city}</h1>}
+            <div className="weather-cards-container">
+                {weatherCards.map((dayData, index) => (
+                    <WeatherCard key={index} {...dayData} />
+                ))}
+            </div>
         </div>
-      </div>
-        
     );
 }
 
 export default WeatherDisplay;
-
