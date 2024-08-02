@@ -1,5 +1,4 @@
 import WeatherDisplay from './components/WeatherDisplay';
-import './app.css'
 
 function App() {
     return (

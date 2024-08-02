@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import WeatherCard from './WeatherCard';
 import { fetchWeatherData } from '../services/weatherService';
 import SearchBar from './SearchBar';
-import '../WeatherCard.css';
-
 function WeatherDisplay() {
     const [weatherCards, setWeatherCards] = useState<any[]>([]);
     const [city, setCity] = useState('London'); // Default city

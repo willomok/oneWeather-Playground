@@ -1,5 +1,3 @@
-import '../WeatherCard.css'
-
 interface WeatherCardProps {
     day: string;
     date: string;
