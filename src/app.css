@@ -1,0 +1,14 @@
+/* App.css */
+.weather-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: #181818;
+    min-height: 100vh;
+}
+
+#app  {
+    font-family: "Source Code Pro", monospace;
+}
