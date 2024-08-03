@@ -50,20 +50,18 @@ export const fetchWeatherData = async (city: string): Promise<WeatherData[]> => 
             params: { q: city, appid: API_KEY, units: 'metric' },
         });
 
-        // Organize the data by date
         const dailyData = data.list.reduce((acc, curr) => {
             const date = curr.dt_txt.split(' ')[0];
-            acc[date] = acc[date] || [];
-            acc[date].push(curr);
+            acc[date] = [...(acc[date] || []), curr];
             return acc;
         }, {} as Record<string, typeof data.list>);
 
-        // Map the organized data to the WeatherData structure
         return Object.entries(dailyData).map(([date, dayData]) => {
-            const avgTemp = dayData.reduce((sum, { main }) => sum + main.temp, 0) / dayData.length;
-            const minTemp = Math.min(...dayData.map(({ main }) => main.temp_min));
-            const maxTemp = Math.max(...dayData.map(({ main }) => main.temp_max));
-            const windSpeed = dayData.reduce((sum, { wind }) => sum + wind.speed, 0) / dayData.length;
+            const temps = dayData.map(({ main }) => main);
+            const avgTemp = (temps.reduce((sum, { temp }) => sum + temp, 0) / temps.length).toFixed(1);
+            const minTemp = Math.min(...temps.map(t => t.temp_min)).toFixed(1);
+            const maxTemp = Math.max(...temps.map(t => t.temp_max)).toFixed(1);
+            const windSpeed = (dayData.reduce((sum, { wind }) => sum + wind.speed, 0) / dayData.length).toFixed(1);
             const { icon, description, main } = dayData[0].weather[0];
             const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
             const conditionType = conditionTypeMap[main] || conditionTypeMap.default;
@@ -73,15 +71,18 @@ export const fetchWeatherData = async (city: string): Promise<WeatherData[]> => 
                 date: new Date(date).toLocaleDateString('en-GB'),
                 iconUrl,
                 description,
-                avgTemp: avgTemp.toFixed(1),
-                minTemp: minTemp.toFixed(1),
-                maxTemp: maxTemp.toFixed(1),
-                windSpeed: windSpeed.toFixed(1),
+                avgTemp,
+                minTemp,
+                maxTemp,
+                windSpeed,
                 conditionType,
             };
         });
-
-    } catch (err: any) {
-        throw err.response?.data?.message || 'Failed to fetch weather data';
+    } catch (err) {
+        if (axios.isAxiosError(err)) {
+            throw err.response?.data?.message || 'Failed to fetch weather data';
+        } else {
+            throw 'An unexpected error occurred';
+        }
     }
 };
