@@ -4,9 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #181818; /* Darker navbar background */
     padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     gap: 10px;
 }
 
@@ -28,7 +26,7 @@
 #searchbar {
     flex: 1;
     padding: 10px;
-    border: 1px solid #404040; /* Border color matching the scheme */
+    border: 1px solid #3d3d3d;
     border-radius: 15px 0 0 15px;
     background-color: #282828; /* Input background color */
     color: #FFFFFF; /* Text color */
@@ -42,7 +40,7 @@
 }
 
 #searchbar:focus {
-    border-color: #F0FFFF; /* Lighter border on focus */
+    border-color: #4682B4; /* Lighter border on focus */
 }
 
 #searchbutton {
@@ -57,8 +55,8 @@
 }
 
 #searchbutton:hover {
-    background-color: #F0FFFF;
-    color: #404040;/* Lighter button color on hover */
+    background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%);
+    color: white;/* Lighter button color on hover */
 }
 
 /* Media Queries for Responsive Design */
