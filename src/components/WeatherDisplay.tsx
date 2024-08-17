@@ -21,6 +21,22 @@ function WeatherDisplay() {
         fetchWeather();
     }, [city]);
 
+    /* useEffect(() => {
+        fetchData()
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const data = await fetchTestData();
+           
+        } catch(e: any) {
+            console.log(e);
+        }
+    }; */
+
+
+
+
     const handleSearch = async (searchedCity: string) => {
         try {
             const data = await fetchWeatherData(searchedCity);
