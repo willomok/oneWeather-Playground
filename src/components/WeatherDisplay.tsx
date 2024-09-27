@@ -5,7 +5,7 @@ import { fetchWeatherData } from '../services/weatherService';
 
 function WeatherDisplay() {
     const [weatherCards, setWeatherCards] = useState<any[]>([]);
-    const [city, setCity] = useState('Manchester');
+    const [city, setCity] = useState('Leeds');
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -20,21 +20,6 @@ function WeatherDisplay() {
         };
         fetchWeather();
     }, [city]);
-
-    /* useEffect(() => {
-        fetchData()
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const data = await fetchTestData();
-           
-        } catch(e: any) {
-            console.log(e);
-        }
-    }; */
-
-
 
 
     const handleSearch = async (searchedCity: string) => {

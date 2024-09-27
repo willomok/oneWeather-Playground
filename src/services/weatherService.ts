@@ -43,15 +43,6 @@ const conditionTypeMap: Record<string, string> = {
     Thunderstorm: 'stormy',
     default: 'default',
 };
-/*
-export const fetchTestData = async (): Promise<string> => {
-    //object destructuring
-    const { data } = await axios.get<string>('http://localhost:5112/bug/1')
-    console.log("response!!", data)
-    return data
-
-} */
-
 
 export const fetchWeatherData = async (city: string): Promise<WeatherData[]> => {
     try {

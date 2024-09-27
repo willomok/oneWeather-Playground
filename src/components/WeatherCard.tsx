@@ -7,7 +7,7 @@ interface WeatherCardProps {
     minTemp: string;
     maxTemp: string;
     windSpeed: string;
-    conditionType: string; // Add conditionType prop for styling
+    conditionType: string; 
 }
 
 const WeatherCard = ({
@@ -19,7 +19,7 @@ const WeatherCard = ({
     minTemp,
     maxTemp,
     windSpeed,
-    conditionType, // Use conditionType to determine the class
+    conditionType, 
 }: WeatherCardProps) => {
     return (
         <div className={`weather-card ${conditionType}`}>
