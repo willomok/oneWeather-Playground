@@ -36,68 +36,68 @@
 
 .description span {
     font-size: 1.1em;
-    color: #FFFFFF; /* Consistent white for description */
+    color: #FFFFFF;
 }
 
 
-/* Temperature Styling - Larger and Responsive */
+
 .temperature {
-    font-size: 2em; /* Base size for small screens */
+    font-size: 2em; 
     margin: 4px 0;
-    color: #FFFFFF; /* Consistent white for temperature */
+    color: #FFFFFF; 
 }
 
 @media (min-width: 768px) {
     .temperature {
-          font-size: 2.5em; /* Slightly larger temperature text on medium screens */
+          font-size: 2.5em; 
       }
   
   }
 @media (min-width: 1024px) {
       .temperature {
-          font-size: 3em; /* Even larger temperature text on large screens */
+          font-size: 3em;
       }
   }
 
 .wind-speed {
     font-size: 0.9em;
     margin: 4px 0;
-    color: #FFFFFF; /* Consistent white for wind speed */
+    color: #FFFFFF; 
 }
 
 .weather-card.sunny {
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); /* Gradient from Gold to Orange for sunny */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); 
+    color: #000000; 
 }
 
 .weather-card.cloudy {
-    background: linear-gradient(135deg, #A9A9A9 0%, #696969 100%); /* Gradient from DarkGray to DimGray for cloudy */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #A9A9A9 0%, #696969 100%); 
+    color: #000000; 
 }
 
 .weather-card.rainy {
-    background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); /* Gradient from LightBlue to SteelBlue for rainy */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #87CEEB 0%, #4682B4 100%); 
+    color: #000000; 
 }
 
 .weather-card.snowy {
-    background: linear-gradient(135deg, #FFFFFF 0%, #D3D3D3 100%); /* Gradient from White to LightGray for snowy */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #FFFFFF 0%, #D3D3D3 100%);
+    color: #000000; 
 }
 
 .weather-card.drizzly {
-    background: linear-gradient(135deg, #B0E0E6 0%, #5F9EA0 100%); /* Gradient from PowderBlue to CadetBlue for drizzly */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #B0E0E6 0%, #5F9EA0 100%); 
+    color: #000000; 
 }
 
 .weather-card.stormy {
-    background: linear-gradient(135deg, #778899 0%, #2F4F4F 100%); /* Gradient from LightSlateGray to DarkSlateGray for stormy */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #778899 0%, #2F4F4F 100%); 
+    color: #000000; 
 }
 
 .weather-card.default {
-    background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%); /* Gradient from light gray to slightly darker gray for default */
-    color: #000000; /* Dark text on light background */
+    background: linear-gradient(135deg, #f9f9f9 0%, #e0e0e0 100%);
+    color: #000000; 
 }
 
 
